@@ -28,8 +28,8 @@ class BasicAuth(Auth):
                                            str) -> str:
         """Decode base64 authorization header and return decoded string
         """
-        if base64_authorization_header is None or not
-        isinstance(base64_authorization_header, str):
+        if base64_authorization_header is None \
+        or not isinstance(base64_authorization_header, str):
             return None
 
         try:
@@ -43,8 +43,8 @@ class BasicAuth(Auth):
                                  str) -> (str, str):
         """Extract user credentials
         """
-        if decoded_base64_authorization_header is None or not
-        isinstance(decoded_base64_authorization_header, str):
+        if decoded_base64_authorization_header is None \
+        or not isinstance(decoded_base64_authorization_header, str):
             return None, None
         if ":" not in decoded_base64_authorization_header:
             return None, None
