@@ -23,6 +23,7 @@ else:
     from api.v1.auth.auth import Auth
     auth = Auth()
 
+
 @app.before_request
 def before_request() -> str:
     """ Before request handler
