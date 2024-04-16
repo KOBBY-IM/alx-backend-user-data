@@ -26,6 +26,7 @@ if getenv("AUTH_TYPE") == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
 
+
 @app.before_request
 def before_request() -> str:
     """ Before request handler
@@ -43,11 +44,13 @@ def before_request() -> str:
         if auth.current_user(request) is None:
             abort(403)
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
+
 
 @app.errorhandler(401)
 def not_authorized(error) -> str:
@@ -61,7 +64,6 @@ def not_allowed(error) -> str:
     """ Not allowed handler
     """
     return jsonify({"error": "Forbidden"}), 403
-
 
 
 if __name__ == "__main__":
