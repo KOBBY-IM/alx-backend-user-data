@@ -8,18 +8,20 @@ from typing import List, TypeVar
 class Auth:
     """ auth class"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """Require authentication for a given path, except for excluded paths."""
+        """Require authentication for a given path, except for excluded paths.
+        """
         if not excluded_paths:
             return True
-        
+
         for excluded_path in excluded_paths:
             if excluded_path.endswith('*'):
                 if path.startswith(excluded_path[:-1]):
                     return False
             elif path == excluded_path:
                 return False
-        
+
         return True
+
     def authorization_header(self, request=None) -> str:
         """ authorization header"""
         if request is None:
