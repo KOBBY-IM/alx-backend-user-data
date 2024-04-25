@@ -13,22 +13,24 @@ AUTH = Auth()
 def welcome():
     return jsonify({"message": "Bienvenue"})
 
+
 @app.route("/users", methods=["POST"])
 def register_user():
     try:
         email = request.form["email"]
         password = request.form["password"]
-        
+
         AUTH.register_user(email, password)
         return jsonify({"email": email, "message": "user created"}), 200
     except ValueError as e:
-        return jsonify({"message": "email already registered" }), 400
+        return jsonify({"message": "email already registered"}), 400
+
 
 @app.route("/sessions", methods=["POST"])
 def login():
     email = request.form.get("email")
     password = request.form.get("password")
-    
+
     try:
         user = AUTH.login(email, password)
         if user:
@@ -46,10 +48,11 @@ def login():
     except ValueError:
         abort(401)
 
+
 @app.route("/sessions", methods=["DELETE"])
 def logout():
     session_id = request.cookies.get("session_id")
-    
+
     try:
         user = AUTH.get_user_by_session_id(session_id)
         if user:
@@ -62,10 +65,11 @@ def logout():
     except ValueError:
         abort(403)
 
+
 @app.route("/profile", methods=["GET"])
 def profile():
     session_id = request.cookies.get("session_id")
-    
+
     try:
         user = AUTH.get_user_by_session_id(session_id)
         if user:
@@ -75,10 +79,11 @@ def profile():
     except ValueError:
         abort(403)
 
+
 @app.route("/reset_password", methods=["POST"])
 def get_reset_password_token():
     email = request.form.get("email")
-    
+
     try:
         user = AUTH.get_user_by_email(email)
         if user:
