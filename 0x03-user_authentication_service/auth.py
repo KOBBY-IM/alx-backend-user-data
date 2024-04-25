@@ -4,7 +4,7 @@
 import bcrypt
 from db import DB
 from user import User
-from auth import Auth
+
 from sqlalchemy.orm.exc import NoResultFound
 
 
